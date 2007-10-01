@@ -1,6 +1,6 @@
 %define name    mlterm
 %define version 2.9.3
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 %define majorkik       10
 %define libnamekik     %mklibname kik %{majorkik}
@@ -19,8 +19,8 @@ Group:       Terminals
 URL:         http://mlterm.sourceforge.net/
 BuildRoot:   %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:     http://prdownloads.sourceforge.net/mlterm/mlterm-%{version}.tar.bz2
-Patch0:      mlterm_font_config.diff.bz2
-Patch1:      mlterm_main_config.diff.bz2
+Patch0:      mlterm_font_config.diff
+Patch1:      mlterm_main_config.diff
 # we need to versionate the two following requires b/c of missing major changes:
 Requires:       %libnamekik = %{version}
 Requires:       %libnamemkf = %{version}
@@ -66,7 +66,6 @@ find -name CVS -type d | xargs -r rm -rf
 
 %build
 %configure \
-	--bindir=%{_prefix}/X11R6/bin \
 	--enable-fribidi \
 	--with-imagelib=gdk-pixbuf \
 	--enable-anti-alias \
@@ -88,16 +87,18 @@ rm -rf $RPM_BUILD_ROOT
 tic -o $RPM_BUILD_ROOT/%{_datadir}/terminfo/ doc/term/mlterm.ti
 
 # install menu entry.
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat << _EOF_ > $RPM_BUILD_ROOT%{_menudir}/%{name}
-?package(%{name}): \
-  needs="X11" \
-  section="System/Terminals" \
-  title="Mlterm" \
-  longtitle="A multi-lingual terminal emulator" \
-  command="/usr/X11R6/bin/mlterm" \
-  icon="%{name}.png"
-_EOF_
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop <<EOF
+[Desktop Entry]
+Name=Mlterm
+Comment=A multi-lingual terminal emulator
+Exec=%{_bindir}/%{name} 
+Icon=%{name}
+Terminal=false
+Type=Application
+StartupNotify=false
+Categories=System;TerminalEmulator;
+EOF
 
 #install icons.
 mkdir -p $RPM_BUILD_ROOT%{_liconsdir} \
@@ -137,14 +138,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc ChangeLog LICENCE README doc/{en,ja}
 %config(noreplace) %{_sysconfdir}/mlterm/
-%{_prefix}/X11R6/bin/*
+%{_bindir}/mlcc
+%{_bindir}/mlclient
+%{_bindir}/mlterm
 %{_libexecdir}/mlconfig
 %{_libexecdir}/mlterm-menu
 %{_libdir}/%{name}
 %{_datadir}/%{name}
 %{_mandir}/man1/*
-
-%{_menudir}/%{name}
+%{_datadir}/applications/mandriva-%{name}.desktop
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
