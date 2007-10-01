@@ -1,6 +1,6 @@
 %define name    mlterm
 %define version 2.9.3
-%define release	%mkrel 2
+%define release	%mkrel 3
 
 %define majorkik       10
 %define libnamekik     %mklibname kik %{majorkik}
