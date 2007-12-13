@@ -1,14 +1,14 @@
 %define name    mlterm
-%define version 2.9.3
-%define release	%mkrel 3
+%define version 2.9.4
+%define release	%mkrel 1
 
 %define majorkik       10
 %define libnamekik     %mklibname kik %{majorkik}
-%define libnamedevkik  %mklibname -d kik %{majorkik} 
+%define libnamedevkik  %mklibname -d kik %{majorkik}
 
 %define majormkf       13
 %define libnamemkf     %mklibname mkf %{majormkf}
-%define libnamedevmkf  %mklibname -d mkf %{majormkf} 
+%define libnamedevmkf  %mklibname -d mkf %{majormkf}
 
 Summary:     Multi Lingual TERMinal emulator for X
 Name:        %{name}
@@ -34,7 +34,7 @@ scratch, which supports various character sets and encodings
 in the world.  It also supports various unique feature such as
 anti-alias using FreeType, multiple windows, scrollbar API,
 scroll by mouse wheel, automatic selection of encoding,
-and so on. Multiple xims are also supported. 
+and so on. Multiple xims are also supported.
 You can dynamically change various xims.
 NOTE: mlterm has good config tools.
 Press Ctrl + right click or Ctrl + left click to run them.
@@ -92,7 +92,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop <<EOF
 [Desktop Entry]
 Name=Mlterm
 Comment=A multi-lingual terminal emulator
-Exec=%{_bindir}/%{name} 
+Exec=%{_bindir}/%{name}
 Icon=%{name}
 Terminal=false
 Type=Application
