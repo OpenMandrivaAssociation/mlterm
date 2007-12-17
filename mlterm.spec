@@ -17,7 +17,6 @@ Release:     %{release}
 License:     BSD style
 Group:       Terminals
 URL:         http://mlterm.sourceforge.net/
-BuildRoot:   %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:     http://prdownloads.sourceforge.net/mlterm/mlterm-%{version}.tar.bz2
 Patch0:      mlterm_font_config.diff
 Patch1:      mlterm_main_config.diff
