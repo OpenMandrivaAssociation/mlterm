@@ -127,11 +127,19 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 %update_menus
 
+%if %mdkversion < 200900
 %post -n %libnamekik -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %libnamekik -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %post -n %libnamemkf -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %libnamemkf -p /sbin/ldconfig
+%endif
 
 
 %files -f mlconfig.lang
