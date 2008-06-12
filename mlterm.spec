@@ -121,11 +121,15 @@ rm -fr $RPM_BUILD_ROOT%{_datadir}/terminfo/m/mlterm
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %mdkversion < 200900
 %post
 %update_menus
+%endif
 
+%if %mdkversion < 200900
 %postun
 %update_menus
+%endif
 
 %if %mdkversion < 200900
 %post -n %libnamekik -p /sbin/ldconfig
