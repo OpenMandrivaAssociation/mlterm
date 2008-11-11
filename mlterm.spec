@@ -65,7 +65,7 @@ routines for handling various character sets.
 find -name CVS -type d | xargs -r rm -rf
 
 %build
-%configure2_5x \
+%configure \
 	--enable-fribidi \
 	--with-imagelib=gdk-pixbuf \
 	--enable-anti-alias \
