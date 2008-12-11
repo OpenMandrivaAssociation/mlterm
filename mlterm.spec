@@ -26,7 +26,7 @@ Requires:       %libnamekik = %{version}
 Requires:       %libnamemkf = %{version}
 Requires:       ncurses-extraterms
 BuildRequires:  fribidi-devel gtk2-devel
-BuildRequires:  ImageMagick
+BuildRequires:  imagemagick
 
 %description
 mlterm is a multi-lingual terminal emulator written from
