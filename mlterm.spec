@@ -22,12 +22,14 @@ Source0:     http://prdownloads.sourceforge.net/mlterm/mlterm-%{version}.tar.bz2
 Patch0:      mlterm_font_config.diff
 Patch1:      mlterm_main_config.diff
 Patch2:      mlterm-2.9.4-mdv-fix-str-fmt.patch
+Patch3:		mlterm-2.9.4-linkage.patch
 # we need to versionate the two following requires b/c of missing major changes:
 Requires:       %libnamekik = %{version}
 Requires:       %libnamemkf = %{version}
 Requires:       ncurses-extraterms
 BuildRequires:  fribidi-devel gtk2-devel
 BuildRequires:  imagemagick
+BuildRequires:	libgdk_pixbuf2.0-devel
 
 %description
 mlterm is a multi-lingual terminal emulator written from
@@ -63,11 +65,11 @@ routines for handling various character sets.
 %patch0 -p0
 %patch1 -p0
 %patch2 -p1 -b .strfmt
-
-find -name CVS -type d | xargs -r rm -rf
+%patch3 -p0 -b .link
 
 %build
-%configure2_5x \
+%define _disable_libtoolize 1
+%configure \
 	--enable-fribidi \
 	--with-imagelib=gdk-pixbuf \
 	--enable-anti-alias \
