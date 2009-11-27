@@ -1,6 +1,6 @@
 %define name    mlterm
 %define version 2.9.4
-%define release	%mkrel 4
+%define release	%mkrel 5
 
 %define majorkik       10
 %define libnamekik     %mklibname kik %{majorkik}
@@ -21,6 +21,7 @@ BuildRoot:   %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:     http://prdownloads.sourceforge.net/mlterm/mlterm-%{version}.tar.bz2
 Patch0:      mlterm_font_config.diff
 Patch1:      mlterm_main_config.diff
+Patch2:      mlterm-2.9.4-mdv-fix-str-fmt.patch
 # we need to versionate the two following requires b/c of missing major changes:
 Requires:       %libnamekik = %{version}
 Requires:       %libnamemkf = %{version}
@@ -61,11 +62,12 @@ routines for handling various character sets.
 %setup -q -n %name-%version
 %patch0 -p0
 %patch1 -p0
+%patch2 -p1 -b .strfmt
 
 find -name CVS -type d | xargs -r rm -rf
 
 %build
-%configure \
+%configure2_5x \
 	--enable-fribidi \
 	--with-imagelib=gdk-pixbuf \
 	--enable-anti-alias \
