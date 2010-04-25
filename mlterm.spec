@@ -1,6 +1,6 @@
 %define name    mlterm
-%define version 2.9.4
-%define release	%mkrel 5
+%define version 3.0.0
+%define release	%mkrel 1
 
 %define majorkik       10
 %define libnamekik     %mklibname kik %{majorkik}
@@ -18,11 +18,11 @@ License:     BSD style
 Group:       Terminals
 URL:         http://mlterm.sourceforge.net/
 BuildRoot:   %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Source0:     http://prdownloads.sourceforge.net/mlterm/mlterm-%{version}.tar.bz2
+Source0:     http://prdownloads.sourceforge.net/mlterm/mlterm-%{version}.tar.gz
 Patch0:      mlterm_font_config.diff
 Patch1:      mlterm_main_config.diff
 Patch2:      mlterm-2.9.4-mdv-fix-str-fmt.patch
-Patch3:		mlterm-2.9.4-linkage.patch
+Patch3:		mlterm-3.0.0-linkage.patch
 # we need to versionate the two following requires b/c of missing major changes:
 Requires:       %libnamekik = %{version}
 Requires:       %libnamemkf = %{version}
@@ -68,8 +68,10 @@ routines for handling various character sets.
 %patch3 -p0 -b .link
 
 %build
-%define _disable_libtoolize 1
-%configure \
+%define _disable_ld_no_undefined 1
+export CFLAGS="%optflags %ldflags"
+%configure2_5x \
+	--disable-static \
 	--enable-fribidi \
 	--with-imagelib=gdk-pixbuf \
 	--enable-anti-alias \
@@ -77,9 +79,6 @@ routines for handling various character sets.
 	--enable-optimize-redrawing \
 	--with-tools \
 	--disable-rpath
-
-# temporary hack until xft cflags is fixed
-find -name 'Makefile' -type f | xargs grep '/usr/X11R6/include/freetype2' | cut -d: -f1 | xargs -r perl -pi -e 's#/usr/X11R6/include/freetype2#/usr/include/freetype2#g'
 
 %make
 
@@ -157,6 +156,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mlcc
 %{_bindir}/mlclient
 %{_bindir}/mlterm
+%{_bindir}/mlclientx
+%{_libdir}/mkf
 %{_libexecdir}/mlconfig
 %{_libexecdir}/mlterm-menu
 %{_libdir}/%{name}
