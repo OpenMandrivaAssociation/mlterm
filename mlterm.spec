@@ -1,6 +1,6 @@
 %define name    mlterm
-%define version 3.0.0
-%define release	%mkrel 2
+%define version 3.0.11
+%define release	1
 
 %define majorkik       10
 %define libnamekik     %mklibname kik %{majorkik}
@@ -17,7 +17,6 @@ Release:     %{release}
 License:     BSD style
 Group:       Terminals
 URL:         http://mlterm.sourceforge.net/
-BuildRoot:   %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:     http://prdownloads.sourceforge.net/mlterm/mlterm-%{version}.tar.gz
 Patch0:      mlterm_font_config.diff
 Patch1:      mlterm_main_config.diff
@@ -65,7 +64,7 @@ routines for handling various character sets.
 %patch0 -p0
 %patch1 -p0
 %patch2 -p1 -b .strfmt
-%patch3 -p0 -b .link
+#%patch3 -p0 -b .link
 
 %build
 %define _disable_ld_no_undefined 1
@@ -83,7 +82,6 @@ export CFLAGS="%optflags %ldflags"
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
 # install terminfo
@@ -121,36 +119,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/libkik.{so,la,a} \
 %find_lang mlconfig
 rm -fr $RPM_BUILD_ROOT%{_datadir}/terminfo/m/mlterm
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%post -n %libnamekik -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libnamekik -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%post -n %libnamemkf -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libnamemkf -p /sbin/ldconfig
-%endif
-
-
 %files -f mlconfig.lang
-%defattr(-,root,root)
 %doc ChangeLog LICENCE README doc/{en,ja}
 %config(noreplace) %{_sysconfdir}/mlterm/
 %{_bindir}/mlcc
@@ -158,6 +127,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mlterm
 %{_bindir}/mlclientx
 %{_libdir}/mkf
+%{_libdir}/libmlterm_core.so
+%{_libdir}/mlimgloader
 %{_libexecdir}/mlconfig
 %{_libexecdir}/mlterm-menu
 %{_libdir}/%{name}
@@ -169,11 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_miconsdir}/%{name}.png
 
 %files -n %libnamekik
-%defattr(-,root,root)
 %_libdir/libkik*.so.*
 
 %files -n %libnamemkf
-%defattr(-,root,root)
 %_libdir/libmkf*.so.*
-
-
