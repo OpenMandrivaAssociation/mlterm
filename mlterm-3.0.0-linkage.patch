@@ -1,0 +1,48 @@
+--- mkf/lib/Makefile.in.link	2010-04-25 15:51:37.000000000 +0200
++++ mkf/lib/Makefile.in	2010-04-25 15:52:58.000000000 +0200
+@@ -68,7 +68,7 @@
+ 
+ $(LIBNAME).la : $(OBJ)
+ 	$(LIBTOOL_LINK) -o $(LIBNAME).la $(OBJ:.o=.lo) -rpath $(libdir) \
+-		@NO_UNDEFINED_FLAG@ -version-info $(MAJOR):$(MINOR):0 @KIK_LIBS@
++		@NO_UNDEFINED_FLAG@ -version-info $(MAJOR):$(MINOR):0 ../../kiklib/src/libkik.la
+ 
+ $(INCDIR_TMP)/mkf :
+ 	mkdir -p $(INCDIR_TMP)/mkf
+--- mkf/libtbl/Makefile.in.link	2010-04-25 16:10:53.000000000 +0200
++++ mkf/libtbl/Makefile.in	2010-04-25 16:12:34.000000000 +0200
+@@ -31,19 +31,19 @@
+ 
+ libmkf_jajp.la: $(JAJP_TABLE_OBJ)
+ 	$(LIBTOOL_LINK) -o libmkf_jajp.la $(JAJP_TABLE_OBJ:.o=.lo) @MKF_CHAR_LO@ \
+-	-rpath $(libdir)/mkf -module -avoid-version @NO_UNDEFINED_FLAG@
++	-rpath $(libdir)/mkf -module -avoid-version @NO_UNDEFINED_FLAG@ ../lib/libmkf.la
+ 
+ libmkf_kokr.la: $(KOKR_TABLE_OBJ)
+ 	$(LIBTOOL_LINK) -o libmkf_kokr.la $(KOKR_TABLE_OBJ:.o=.lo) @MKF_CHAR_LO@ \
+-	-rpath $(libdir)/mkf -module -avoid-version @NO_UNDEFINED_FLAG@
++	-rpath $(libdir)/mkf -module -avoid-version @NO_UNDEFINED_FLAG@ ../lib/libmkf.la
+ 
+ libmkf_zh.la: $(ZH_TABLE_OBJ)
+ 	$(LIBTOOL_LINK) -o libmkf_zh.la $(ZH_TABLE_OBJ:.o=.lo) @MKF_CHAR_LO@ \
+-	-rpath $(libdir)/mkf -module -avoid-version @NO_UNDEFINED_FLAG@
++	-rpath $(libdir)/mkf -module -avoid-version @NO_UNDEFINED_FLAG@ ../lib/libmkf.la
+ 
+ libmkf_8bits.la: $(BYTE_TABLE_OBJ)
+ 	$(LIBTOOL_LINK) -o libmkf_8bits.la $(BYTE_TABLE_OBJ:.o=.lo) @MKF_CHAR_LO@ \
+-	-rpath $(libdir)/mkf -module -avoid-version @NO_UNDEFINED_FLAG@
++	-rpath $(libdir)/mkf -module -avoid-version @NO_UNDEFINED_FLAG@ ../lib/libmkf.la
+ 
+ install: install-la
+ 
+--- inputmethod/kbd/Makefile.in.link	2010-04-25 16:17:28.000000000 +0200
++++ inputmethod/kbd/Makefile.in	2010-04-25 16:17:55.000000000 +0200
+@@ -21,7 +21,7 @@
+ 	 -I${top_srcdir}/xwindow	\
+ 	 -I/usr/local/include
+ 
+-LIBS = $(LIBS_LOCAL) @KIK_LIBS_FOR_MODULE@ @MKF_LIBS_FOR_MODULE@
++LIBS = $(LIBS_LOCAL) @KIK_LIBS_FOR_MODULE@ @MKF_LIBS_FOR_MODULE@ $(top_builddir)/mkf/lib/libmkf.la
+ 
+ CC      = @CC@
+ INSTALL = @INSTALL@
