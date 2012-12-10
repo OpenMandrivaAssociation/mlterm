@@ -144,3 +144,64 @@ rm -fr $RPM_BUILD_ROOT%{_datadir}/terminfo/m/mlterm
 
 %files -n %libnamemkf
 %_libdir/libmkf*.so.*
+
+
+%changelog
+* Thu Apr 19 2012 Alexander Khrukin <akhrukin@mandriva.org> 3.0.11-1
++ Revision: 791996
+- version update 3.0.11
+
+* Mon Dec 06 2010 Oden Eriksson <oeriksson@mandriva.com> 3.0.0-2mdv2011.0
++ Revision: 612872
+- the mass rebuild of 2010.1 packages
+
+* Sun Apr 25 2010 Funda Wang <fwang@mandriva.org> 3.0.0-1mdv2010.1
++ Revision: 538658
+- New version 3.0.0
+- fix linkage
+
+  + Jérôme Brenier <incubusss@mandriva.org>
+    - use %%configure2_5x
+    - fix str fmt (P2)
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - lowercase ImageMagick
+
+* Tue Nov 11 2008 Funda Wang <fwang@mandriva.org> 2.9.4-3mdv2009.1
++ Revision: 302071
+- revert to configure as 2_5x breaks x86_64 build
+- use configure2_5x
+
+* Tue Jul 29 2008 Thierry Vignaud <tv@mandriva.org> 2.9.4-3mdv2009.0
++ Revision: 252611
+- rebuild
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+* Thu Dec 13 2007 Jérôme Soyer <saispo@mandriva.org> 2.9.4-1mdv2008.1
++ Revision: 119233
+- New release 2.9.4
+
+* Mon Oct 01 2007 Herton Ronaldo Krzesinski <herton@mandriva.com.br> 2.9.3-3mdv2008.0
++ Revision: 94090
+- Rebuild for fixed package changelog.
+
+* Mon Oct 01 2007 Herton Ronaldo Krzesinski <herton@mandriva.com.br> 2.9.3-2mdv2008.0
++ Revision: 94081
+- Rebuild (#34355).
+- Bunzip patches.
+- Install binaries at /usr/bin, not /usr/X11R6/bin (#34324).
+- Switch to xdg menu.
+
+  + Jérôme Soyer <saispo@mandriva.org>
+    - import mlterm
+
