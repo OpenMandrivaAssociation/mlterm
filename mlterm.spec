@@ -1,7 +1,3 @@
-%define name    mlterm
-%define version 3.0.11
-%define release 	2
-
 %define majorkik       10
 %define libnamekik     %mklibname kik %{majorkik}
 %define libnamedevkik  %mklibname -d kik %{majorkik}
@@ -11,9 +7,9 @@
 %define libnamedevmkf  %mklibname -d mkf %{majormkf}
 
 Summary:     Multi Lingual TERMinal emulator for X
-Name:        %{name}
-Version:     %{version}
-Release:     %{release}
+Name:        mlterm
+Version:     3.0.11
+Release:     3
 License:     BSD style
 Group:       Terminals
 URL:         http://mlterm.sourceforge.net/
@@ -26,7 +22,8 @@ Patch3:		mlterm-3.0.0-linkage.patch
 Requires:       %libnamekik = %{version}
 Requires:       %libnamemkf = %{version}
 Requires:       ncurses-extraterms
-BuildRequires:  fribidi-devel gtk2-devel
+BuildRequires:  fribidi-devel
+BuildRequires:  pkgconfig(gtk+-2.0)
 BuildRequires:  imagemagick
 BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 
