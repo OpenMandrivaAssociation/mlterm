@@ -28,7 +28,7 @@ Requires:       %libnamemkf = %{version}
 Requires:       ncurses-extraterms
 BuildRequires:  fribidi-devel gtk2-devel
 BuildRequires:  imagemagick
-BuildRequires:	libgdk_pixbuf2.0-devel
+BuildRequires:	pkgconfig(gdk-pixbuf-2.0)
 
 %description
 mlterm is a multi-lingual terminal emulator written from
