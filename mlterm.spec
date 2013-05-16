@@ -1,15 +1,15 @@
-%define majorkik       10
+%define majorkik       14
 %define libnamekik     %mklibname kik %{majorkik}
 %define libnamedevkik  %mklibname -d kik %{majorkik}
 
-%define majormkf       13
+%define majormkf       16
 %define libnamemkf     %mklibname mkf %{majormkf}
 %define libnamedevmkf  %mklibname -d mkf %{majormkf}
 
 Summary:     Multi Lingual TERMinal emulator for X
 Name:        mlterm
 Version:     3.0.11
-Release:     3
+Release:     4
 License:     BSD style
 Group:       Terminals
 URL:         http://mlterm.sourceforge.net/
@@ -137,10 +137,10 @@ rm -fr $RPM_BUILD_ROOT%{_datadir}/terminfo/m/mlterm
 %{_miconsdir}/%{name}.png
 
 %files -n %libnamekik
-%_libdir/libkik*.so.*
+%_libdir/libkik*.so.%{majorkik}*
 
 %files -n %libnamemkf
-%_libdir/libmkf*.so.*
+%_libdir/libmkf*.so.%{majormkf}*
 
 
 %changelog
