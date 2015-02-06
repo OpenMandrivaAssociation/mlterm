@@ -9,7 +9,7 @@
 Summary:     Multi Lingual TERMinal emulator for X
 Name:        mlterm
 Version:     3.0.11
-Release:     4
+Release:     5
 License:     BSD style
 Group:       Terminals
 URL:         http://mlterm.sourceforge.net/
