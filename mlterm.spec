@@ -12,7 +12,7 @@ Version:     3.0.11
 Release:     5
 License:     BSD style
 Group:       Terminals
-URL:         http://mlterm.sourceforge.net/
+URL:         https://mlterm.sourceforge.net/
 Source0:     http://prdownloads.sourceforge.net/mlterm/mlterm-%{version}.tar.gz
 Patch0:      mlterm_font_config.diff
 Patch1:      mlterm_main_config.diff
