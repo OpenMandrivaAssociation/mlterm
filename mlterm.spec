@@ -22,6 +22,11 @@ Patch3:		mlterm-3.0.0-linkage.patch
 Requires:       %libnamekik = %{version}
 Requires:       %libnamemkf = %{version}
 Requires:       ncurses-extraterms
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:  fribidi-devel
 BuildRequires:  pkgconfig(gtk+-2.0)
 BuildRequires:  imagemagick
